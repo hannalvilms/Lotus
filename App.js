@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { SafeAreaView } from 'react-native';
+import Main from './src/index';
+import { store, persistor } from './src/config/store';
+
+EStyleSheet.build({
+    $primaryBlue: '#4F6D7A',
+    $primaryYellow: '#F49531',
+    $primaryBrown: '#7A3100',
+
+    $white: '#FFFFFF',
+    $lightGray: '#F0F0F0',
+    $border: '#E2E2E2',
+    $inputText: '#797979',
+    $darkText: '#474554',
+});
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
+                <Main />
+            </PersistGate>
+        </Provider>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
